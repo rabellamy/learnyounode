@@ -1,8 +1,17 @@
-
-
+var path = require('path');
 var mymodule = require('./module');
 
 
-mymodule.listFiles(process.argv[2], process.argv[3], mymodule.listFilesCallback);
+function listFilesCallback(list, extensionToFilter) {
 
-// exports.listFiles('.', 'js', listFilesCallback);
+  list.forEach(function (file) {
+    if (path.extname(file) === '.' + extensionToFilter) {
+     console.log(file)
+    }
+
+  });
+
+}
+
+
+mymodule(process.argv[2], process.argv[3], listFilesCallback);
